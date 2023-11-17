@@ -14,7 +14,7 @@ function ContactSections()  {
       .then((result) => {
           console.log(result.text);
           window.alert('Message sent successfully')
-          window.location.reload();
+          
       }, (error) => {
           console.log(error.text);
           window.alert(error.text);
