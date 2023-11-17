@@ -42,7 +42,7 @@ const ResetPassword = () => {
     const requiredData = {
       grant_type: 'client_credentials',
       client_id: 'creamcollar_client',
-      client_secret: 'XSijvfCIKpFt7vvRiieVA2ey5DC60U0t',
+      client_secret: 'Av2q7rGG5ndSTBljEx5AEP7LSC66WcNw',
     };
  
     try {

@@ -7,7 +7,7 @@ import stakeholder1 from '../../assets/img/stakeholder1.webp';
 import stakeholder2 from '../../assets/img/stakeholder2.webp';
 import stakeholder3 from '../../assets/img/stakeholder3.webp';
 import logo from'../../assets/img/creamcollar-logo.svg';
-
+import { NavLink } from 'react-router-dom';
 function Challenges()  {
     return (
       <div>
@@ -128,8 +128,10 @@ function Challenges()  {
         <div className="movement"> <img src={logo} className="mb-4" alt="..."/>
           <h1>Alone we can do so little, together we can do so much - Helen Keller</h1>
           <div className="d-grid gap-4 d-flex justify-content-center">
-            <a className="btn btn-primary" type="button" href="contact-us.html">Contact us</a>
-            <a className="btn btn-primary" type="button" href="about-us.html">About us</a>
+          <NavLink to="/about" className="btn btn-primary" type="button" >About Us</NavLink>
+          <NavLink to="/contact" className="btn btn-primary" type="button" >Contact Us</NavLink>
+            
+            
           </div>
         </div>
       </div>

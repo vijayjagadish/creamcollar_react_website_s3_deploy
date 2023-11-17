@@ -1,65 +1,85 @@
-import { useState } from "react";
+import { useState, useRef} from "react";
 import $ from "jquery";
 import Swal from "sweetalert2";
+import emailjs from '@emailjs/browser';
+
 function ContactSections()  {
-  const [name, setName] = useState("");
-  const [result, setResult] = useState("");
 
-  const handleChange = (e) => {
-      setName(e.target.value);
-  };
-  var content =''
-  var msg_type=''
+  const form = useRef();
 
-    const [inputValue1, setInputValue1] = useState('');
-  
-    const handleInputChange1 = (event) => {
-      setInputValue1(event.target.value);
-    };
-    const [inputValue2, setInputValue2] = useState('');
-  
-    const handleInputChange2 = (event) => {
-      setInputValue2(event.target.value);
-    };
-    const [inputValue3, setInputValue3] = useState('');
-  
-    const handleInputChange3 = (event) => {
-      setInputValue3(event.target.value);
-    };
-    const [inputValue4, setInputValue4] = useState('');
-  
-    const handleInputChange4 = (event) => {
-      setInputValue4(event.target.value);
-    };
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      const form = $(e.target);
-      $.ajax({
-          type: "POST",
-          url: form.attr("action"),
-          data: form.serialize(),
-          success(data) {
-            if(data=='SUCCESS'){
-              content = 'Thankyou for contacting us, We will contact you soon.';
-             msg_type ='success';
-            }
-          else{
-            content = 'Sorry for any inconvenience, we can\'t reach the server so that you can try later';
-            msg_type ='error';
-          }
-          setInputValue1('');
-          setInputValue2('');
-          setInputValue3('');
-          setInputValue4('');
-              setResult(content);
-              Swal.fire({
-               
-                text: content,
-                icon: msg_type
-              });
-          },
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_fgs496c', 'template_l7bqj99', form.current, 'ojS0CkbYhXCWw7nMt')
+      .then((result) => {
+          console.log(result.text);
+          window.alert('Message sent successfully')
+          window.location.reload();
+      }, (error) => {
+          console.log(error.text);
+          window.alert(error.text);
+          
       });
   };
+
+  // const [name, setName] = useState("");
+  // const [result, setResult] = useState("");
+
+  // const handleChange = (e) => {
+  //     setName(e.target.value);
+  // };
+  // var content =''
+  // var msg_type=''
+
+  //   const [inputValue1, setInputValue1] = useState('');
+  
+  //   const handleInputChange1 = (event) => {
+  //     setInputValue1(event.target.value);
+  //   };
+  //   const [inputValue2, setInputValue2] = useState('');
+  
+  //   const handleInputChange2 = (event) => {
+  //     setInputValue2(event.target.value);
+  //   };
+  //   const [inputValue3, setInputValue3] = useState('');
+  
+  //   const handleInputChange3 = (event) => {
+  //     setInputValue3(event.target.value);
+  //   };
+  //   const [inputValue4, setInputValue4] = useState('');
+  
+  //   const handleInputChange4 = (event) => {
+  //     setInputValue4(event.target.value);
+  //   };
+  // const handleSubmit = (e) => {
+  //     e.preventDefault();
+  //     const form = $(e.target);
+  //     $.ajax({
+  //         type: "POST",
+  //         url: form.attr("action"),
+  //         data: form.serialize(),
+  //         success(data) {
+  //           if(data=='SUCCESS'){
+  //             content = 'Thankyou for contacting us, We will contact you soon.';
+  //            msg_type ='success';
+  //           }
+  //         else{
+  //           content = 'Sorry for any inconvenience, we can\'t reach the server so that you can try later';
+  //           msg_type ='error';
+  //         }
+  //         setInputValue1('');
+  //         setInputValue2('');
+  //         setInputValue3('');
+  //         setInputValue4('');
+  //             setResult(content);
+  //             Swal.fire({
+               
+  //               text: content,
+  //               icon: msg_type
+  //             });
+  //         },
+  //     });
+  // };
     return (
   <div>
    <section className="contact">
@@ -74,23 +94,22 @@ function ContactSections()  {
             <div className="col-lg-5 mb-lg-0 mb-5">
               <h6 className="contact-title">How can we help?</h6>
               <p className="contact-info">Please reach out to us with your query, our team of experts will be happy to assist you</p>
-              <form className="contact-form" action="http://localhost/mail.php" method="post" onSubmit={(event) => handleSubmit(event)}>
+              <form className="contact-form" ref={form} onSubmit={sendEmail}>
                 <div className="row">
                   <div className="col-lg-12 col-md-4 mb-3">
-                    <input value={inputValue1} onChange={handleInputChange1} type="text" className="form-control clear-button"  name="name" placeholder="Name *"/>
+                    <input type="text" className="form-control clear-button"  name="name" placeholder="Name *"/>
                   </div>
                   <div className="col-lg-12 col-md-4 mb-3">
-                    <input value={inputValue2} onChange={handleInputChange2}  type="email" className="form-control clear-button"  name="email" placeholder="Email *"/>
+                    <input  type="email" className="form-control clear-button"  name="email" placeholder="Email *"/>
                   </div>
                   <div className="col-lg-12 col-md-4 mb-3">
-                    <input  value={inputValue3} onChange={handleInputChange3} type="text" className="form-control clear-button"  name="phone" placeholder="Phone number"/>
+                    <input  type="text" className="form-control clear-button"  name="phone" placeholder="Phone number"/>
                   </div>
                   <div className="col-lg-12 mb-3">
-                    <textarea value={inputValue4} onChange={handleInputChange4} className="form-control clear-button"  placeholder="Add your message" name="message" rows="4"></textarea>
+                    <textarea className="form-control clear-button"  placeholder="Add your message" name="message" rows="4"></textarea>
                   </div>
                   <div className="col-lg-12">
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    <div className="hidden">{result}</div>
+                    <button type="submit" className="btn btn-primary" value="Send">Submit</button>
                   </div>
                 </div>
               </form>

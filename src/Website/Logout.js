@@ -7,7 +7,7 @@ const Logout = () => {
   const handleLogout = () => {
     // Retrieve the refresh token and client secret from local storage
     const refreshToken = localStorage.getItem('refreshToken');
-    const clientSecret = 'XSijvfCIKpFt7vvRiieVA2ey5DC60U0t'; // Replace with your actual client secret
+    const clientSecret = 'Av2q7rGG5ndSTBljEx5AEP7LSC66WcNw'; // Replace with your actual client secret
    
     if (refreshToken) {
       // Send a request to the Keycloak logout endpoint with the refresh token and client secret

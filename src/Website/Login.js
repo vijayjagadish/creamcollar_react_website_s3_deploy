@@ -31,7 +31,7 @@ const Login = () => {
     const requestData = {
       grant_type: 'password',
       client_id: 'creamcollar_client',
-      client_secret: 'XSijvfCIKpFt7vvRiieVA2ey5DC60U0t',
+      client_secret: 'Av2q7rGG5ndSTBljEx5AEP7LSC66WcNw',
       username: username,
       password: password,
     };
